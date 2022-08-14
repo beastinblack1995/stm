@@ -192,13 +192,7 @@ def app_loopback():
 
 
 def app_video_filters():
-    if st.button("show attendence"):
-    
-        st.dataframe(pd.read_csv('attendence.csv'))
-    
-    if st.button("clear attendence"):
-        df =pd.DataFrame()
-        df.to_csv('attendence.csv')
+
 
         
         
