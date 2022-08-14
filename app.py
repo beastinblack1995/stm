@@ -154,7 +154,6 @@ def main():
     pages = {
 
         "Recognise employee": app_video_filters,  # noqa: E501
-        "show attendence": show_attendence, 
 
     }    
     
@@ -184,13 +183,8 @@ def main():
         if thread.is_alive():
             logger.debug(f"  {thread.name} ({thread.ident})")
 
-def show_attendence():
-    
-    st.dataframe(pd.read_csv('attendence.csv'))
-    
-    if st.button("clear attendence"):
-        df =pd.DataFrame()
-        df.to_csv('attendence.csv')
+
+
     
 def app_loopback():
     """Simple video loopback"""
@@ -198,6 +192,13 @@ def app_loopback():
 
 
 def app_video_filters():
+    if st.button("show attendence"):
+    
+        st.dataframe(pd.read_csv('attendence.csv'))
+    
+    if st.button("clear attendence"):
+        df =pd.DataFrame()
+        df.to_csv('attendence.csv')
 
         
         
