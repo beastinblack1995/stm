@@ -6,6 +6,7 @@ import urllib.request
 from pathlib import Path
 from typing import List, NamedTuple, Optional
 import os
+import pandas as pd
 
 import av
 import cv2
@@ -190,6 +191,8 @@ def app_loopback():
 
 def app_video_filters():
     """Video transforms with OpenCV"""
+    if st.button("Show attendence"):
+        st.dataframe(pd.read_csv('attendence.csv'))
 
 #    _type = st.radio("Select transform type", ("noop", "cartoon", "edges", "rotate"))
 
@@ -223,6 +226,7 @@ def app_video_filters():
             cv2.rectangle(img, (startX, startY), (endX, endY), (0, 255, 0), 2)
             cv2.putText(img, name, (endY+6, endX-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
             print(name)        
+            MarkAttendence(name)
                
         
         
