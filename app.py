@@ -379,11 +379,7 @@ def app_object_detection():
                     result = None
                 labels_placeholder.table(result)
 
-    st.markdown(
-        "This demo uses a model and code from "
-        "https://github.com/robmarkcole/object-detection-app. "
-        "Many thanks to the project."
-    )
+
 
 
 def app_streaming():
