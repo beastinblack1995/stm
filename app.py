@@ -196,10 +196,8 @@ def app_video_filters():
         
         
     if st.button("clear attendence"):
-        df = pd.read_csv('attendence.csv')
-        df = df.drop(df.index, inplace=True)
-        df = df.to_csv('attendence.csv')
-        st.dataframe(pd.read_csv('attendence.csv'))
+        df =pd.DataFrame()
+        df.to_csv('attendence.csv')
         
 
 #    _type = st.radio("Select transform type", ("noop", "cartoon", "edges", "rotate"))
