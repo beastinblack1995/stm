@@ -21,6 +21,62 @@ from streamlit_webrtc import (
     webrtc_streamer,
 )
 
+##
+import face_recognition as face_rec
+import cv2
+import shutil
+path = 'employee images'
+employeeImg = []
+
+employeeName = []
+myList = os.listdir(path)
+filename = 'click'
+
+
+def resize(img, size) :
+    width = int(img.shape[1]*size)
+    height = int(img.shape[0] * size)
+    dimension = (width, height)
+    return cv2.resize(img, dimension, interpolation= cv2.INTER_AREA)
+
+
+
+def findEncoding(images) :
+    imgEncodings = []
+    for img in images :
+        img = resize(img, 0.50)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        encodeimg = face_rec.face_encodings(img)[0]
+        imgEncodings.append(encodeimg)
+    return imgEncodings
+def MarkAttendence(name):
+    with open('attendence.csv', 'r+') as f:
+        myDatalist =  f.readlines()
+        nameList = []
+        for line in myDatalist :
+            entry = line.split(',')
+            nameList.append(entry[0])
+
+        if name not in nameList:
+            now = datetime.now()
+            timestr = now.strftime('%H:%M')
+            f.writelines(f'\n{name}, {timestr}')
+            statment = str('welcome to seasia' + name)
+
+for cl in myList :
+    curimg = cv2.imread(f'{path}/{cl}')
+    employeeImg.append(curimg)
+    employeeName.append(os.path.splitext(cl)[0])
+
+EncodeList = findEncoding(employeeImg)
+
+
+
+
+
+##
+
+
 HERE = Path(__file__).parent
 
 logger = logging.getLogger(__name__)
@@ -128,6 +184,37 @@ def app_video_filters():
 
     def callback(frame: av.VideoFrame) -> av.VideoFrame:
         img = frame.to_ndarray(format="bgr24")
+        
+        
+        facesInFrame = face_rec.face_locations(img)
+        encodeFacesInFrame = face_rec.face_encodings(img, facesInFrame)
+            
+
+        for encodeFace, faceloc in zip(encodeFacesInFrame, facesInFrame) :
+            matches = face_rec.compare_faces(EncodeList, encodeFace)
+            facedis = face_rec.face_distance(EncodeList, encodeFace)
+            print(facedis)
+            #if min(facedis) < 0.5:
+            matchIndex = np.argmin(facedis)
+
+            print(matchIndex)
+
+
+            name = employeeName[matchIndex].upper()
+            y1, x2, y2, x1 = faceloc
+            y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
+
+            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
+            cv2.rectangle(img, (x1, y2-25), (x2, y2), (0, 255, 0), cv2.FILLED)
+            cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+
+            startX, startY, endX, endY = faceloc
+            cv2.rectangle(img, (startX, startY), (endX, endY), (0, 255, 0), 2)
+            cv2.putText(img, name, (endY+6, endX-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+            print(name)        
+               
+        
+        
 
         if _type == "noop":
             pass
