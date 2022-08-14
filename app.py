@@ -185,10 +185,12 @@ def main():
             logger.debug(f"  {thread.name} ({thread.ident})")
 
 def show_attendence():
+    
     st.dataframe(pd.read_csv('attendence.csv'))
-        if st.button("clear attendence"):
-            df =pd.DataFrame()
-            df.to_csv('attendence.csv')
+    
+    if st.button("clear attendence"):
+        df =pd.DataFrame()
+        df.to_csv('attendence.csv')
     
 def app_loopback():
     """Simple video loopback"""
