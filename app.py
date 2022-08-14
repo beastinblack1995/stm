@@ -172,11 +172,7 @@ def app_video_filters():
         async_processing=True,
     )
 
-    st.markdown(
-        "This demo is based on "
-        "https://github.com/aiortc/aiortc/blob/2362e6d1f0c730a0f8c387bbea76546775ad2fe8/examples/server/server.py#L34. "  # noqa: E501
-        "Many thanks to the project."
-    )
+
 
 
 def app_audio_filter():
@@ -243,10 +239,7 @@ def app_delayed_echo():
 
 
 def app_object_detection():
-    """Object detection demo with MobileNet SSD.
-    This model and code are based on
-    https://github.com/robmarkcole/object-detection-app
-    """
+
     MODEL_URL = "https://github.com/robmarkcole/object-detection-app/raw/master/model/MobileNetSSD_deploy.caffemodel"  # noqa: E501
     MODEL_LOCAL_PATH = HERE / "./models/MobileNetSSD_deploy.caffemodel"
     PROTOTXT_URL = "https://github.com/robmarkcole/object-detection-app/raw/master/model/MobileNetSSD_deploy.prototxt.txt"  # noqa: E501
@@ -488,11 +481,7 @@ def app_streaming():
         video_frame_callback=video_frame_callback,
     )
 
-    st.markdown(
-        "The video filter in this demo is based on "
-        "https://github.com/aiortc/aiortc/blob/2362e6d1f0c730a0f8c387bbea76546775ad2fe8/examples/server/server.py#L34. "  # noqa: E501
-        "Many thanks to the project."
-    )
+
 
 
 def app_sendonly_video():
