@@ -197,7 +197,8 @@ def app_video_filters():
         
     if st.button("clear attendence"):
         df = pd.read_csv('attendence.csv')
-        df.drop(df.index, inplace=True).to_csv('attendence.csv')
+        df = df.drop(df.index, inplace=True)
+        df = df.to_csv('attendence.csv')
         st.dataframe(pd.read_csv('attendence.csv'))
         
 
