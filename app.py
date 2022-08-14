@@ -193,6 +193,10 @@ def app_video_filters():
     """Video transforms with OpenCV"""
     if st.button("Show attendence"):
         st.dataframe(pd.read_csv('attendence.csv'))
+    if st.button("clear attendence"):
+        df.drop(df.index, inplace=True).to_csv('attendence.csv')
+        st.dataframe(pd.read_csv('attendence.csv'))
+        
 
 #    _type = st.radio("Select transform type", ("noop", "cartoon", "edges", "rotate"))
 
