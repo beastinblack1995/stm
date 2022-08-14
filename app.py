@@ -154,6 +154,7 @@ def main():
     pages = {
 
         "Recognise employee": app_video_filters,  # noqa: E501
+        "show attendence": show_attendence, 
 
     }    
     
@@ -183,21 +184,23 @@ def main():
         if thread.is_alive():
             logger.debug(f"  {thread.name} ({thread.ident})")
 
-
+def show_attendence():
+    st.dataframe(pd.read_csv('attendence.csv'))
+        if st.button("clear attendence"):
+            df =pd.DataFrame()
+            df.to_csv('attendence.csv')
+    
 def app_loopback():
     """Simple video loopback"""
     webrtc_streamer(key="loopback")
 
 
 def app_video_filters():
-    """Video transforms with OpenCV"""
-    if st.button("Show attendence"):
-        st.dataframe(pd.read_csv('attendence.csv'))
+
         
         
-    if st.button("clear attendence"):
-        df =pd.DataFrame()
-        df.to_csv('attendence.csv')
+        
+
         
 
 #    _type = st.radio("Select transform type", ("noop", "cartoon", "edges", "rotate"))
