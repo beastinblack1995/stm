@@ -5,6 +5,7 @@ import threading
 import urllib.request
 from pathlib import Path
 from typing import List, NamedTuple, Optional
+import os
 
 import av
 import cv2
