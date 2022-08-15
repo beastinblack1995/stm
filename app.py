@@ -207,32 +207,33 @@ def app_video_filters():
         
         
         facesInFrame = face_rec.face_locations(img)
-        encodeFacesInFrame = face_rec.face_encodings(img, facesInFrame)
-            
-
-        for encodeFace, faceloc in zip(encodeFacesInFrame, facesInFrame) :
-            matches = face_rec.compare_faces(EncodeList, encodeFace)
-            facedis = face_rec.face_distance(EncodeList, encodeFace)
-            print(facedis)
-            #if min(facedis) < 0.5:
-            matchIndex = np.argmin(facedis)
-
-            print(matchIndex)
+        if len(facesInFrame) > 0:
+            encodeFacesInFrame = face_rec.face_encodings(img, facesInFrame)
 
 
-            name = employeeName[matchIndex].upper()
-            y1, x2, y2, x1 = faceloc
-            y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
+            for encodeFace, faceloc in zip(encodeFacesInFrame, facesInFrame) :
+                matches = face_rec.compare_faces(EncodeList, encodeFace)
+                facedis = face_rec.face_distance(EncodeList, encodeFace)
+                print(facedis)
+                #if min(facedis) < 0.5:
+                matchIndex = np.argmin(facedis)
 
-            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
-            cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), cv2.FILLED)
-            cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+                print(matchIndex)
 
-            startX, startY, endX, endY = faceloc
-            cv2.rectangle(img, (startX, startY), (endX, endY), (0, 255, 0), 2)
-            cv2.putText(img, name, (endY+6, endX-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
-            print(name)        
-            MarkAttendence(name)
+
+                name = employeeName[matchIndex].upper()
+                y1, x2, y2, x1 = faceloc
+                y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
+
+                cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 3)
+                cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), cv2.FILLED)
+                cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+
+                startX, startY, endX, endY = faceloc
+                cv2.rectangle(img, (startX, startY), (endX, endY), (0, 255, 0), 2)
+                cv2.putText(img, name, (endY+6, endX-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+                print(name)        
+                MarkAttendence(name)
                
         
         
