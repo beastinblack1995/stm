@@ -217,9 +217,9 @@ def emprec(img):
 #             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), cv2.FILLED)
 #             cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
 
-            startX, startY, endX, endY = faceloc
-            cv2.rectangle(img, (startX, startY), (endX, endY), (0, 255, 0), 2)
-            cv2.putText(img, name, (endY+6, endX-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+            top, right, bottom, left = faceloc
+            cv2.rectangle(img, (left, top), (right, bottom), (0, 255, 0), 2)
+            cv2.putText(img, name,  (left + 6, bottom - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
             print(name)        
             MarkAttendence(name)
             return img
