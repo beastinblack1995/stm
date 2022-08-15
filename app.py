@@ -153,7 +153,8 @@ def main():
     
     pages = {
 
-        "Recognise employee": app_video_filters,  # noqa: E501
+        "simple_stream": app_video_filters,  # noqa: E501
+        "employ_recog":employ_recog
 
     }    
     
@@ -226,6 +227,24 @@ def emprec(img):
     
     
     
+def employ_recog():
+
+
+    def callback(frame: av.VideoFrame) -> av.VideoFrame:
+        img = frame.to_ndarray(format="bgr24")
+        img = emprec(img)
+
+
+        return av.VideoFrame.from_ndarray(img, format="bgr24")
+
+    webrtc_streamer(
+        key="opencv-filter",
+        mode=WebRtcMode.SENDRECV,
+        rtc_configuration=RTC_CONFIGURATION,
+        video_frame_callback=callback,
+        media_stream_constraints={"video": True, "audio": False},
+        async_processing=True,
+    )
     
     
     
