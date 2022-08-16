@@ -154,7 +154,7 @@ def main():
     pages = {
 
         "simple_stream": app_video_filters,  # noqa: E501
-        "employ_recog":employ_recog
+        "employ_recog":employ_recog,"takepic":takepic
 
     }    
     
@@ -235,6 +235,7 @@ def employ_recog():
         img = emprec(img)
 
 
+
         return av.VideoFrame.from_ndarray(img, format="bgr24")
 
     webrtc_streamer(
@@ -251,7 +252,17 @@ def employ_recog():
     
     
     
-    
+ def takepic()
+    img_file_buffer = st.camera_input("Take a picture")
+
+    if img_file_buffer is not None:
+        # To read image file buffer as a PIL Image:
+        img = Image.open(img_file_buffer)
+
+        # To convert PIL Image to numpy array:
+        img = np.array(img)
+        img = emprec(img)
+        st.image(img)
     
     
     
