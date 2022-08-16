@@ -189,9 +189,9 @@ def emprec(img):
     
     
 def takepic():
-    if st.button('show attendence):
+    if st.button('show attendence'):
         st.dataframe(pd.read_csv('attendence.csv'))
-    if st.button('clear attendence):
+    if st.button('clear attendence'):
         dx = pd.DataFrame() 
         dx.to_csv('attendence.csv')         
                              
