@@ -257,10 +257,10 @@ def takepic():
 
     if img_file_buffer is not None:
         # To read image file buffer as a PIL Image:
-        img = Image.open(img_file_buffer)
+        
 
         # To convert PIL Image to numpy array:
-        img = np.array(img)
+        img = np.array(img_file_buffer)
         img = emprec(img)
         st.image(img)
     
