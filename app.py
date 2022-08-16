@@ -224,7 +224,7 @@ def emprec(img):
             MarkAttendence(name)
             return img
     
-     else:
+    else:
         return img
          
     
