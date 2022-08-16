@@ -224,7 +224,9 @@ def emprec(img):
             MarkAttendence(name)
             return img
     
-    
+     else:
+        return img
+         
     
     
 def employ_recog():
@@ -257,10 +259,16 @@ def takepic():
 
     if img_file_buffer is not None:
         # To read image file buffer as a PIL Image:
+
+        
+        bytes_data = img_file_buffer.getvalue()
+        cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)       
+        
+        
         
 
         # To convert PIL Image to numpy array:
-        img = np.array(img_file_buffer)
+        img = np.array(cv2_img)
         img = emprec(img)
         st.image(img)
     
