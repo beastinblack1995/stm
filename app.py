@@ -252,7 +252,7 @@ def employ_recog():
     
     
     
- def takepic()
+ def takepic():
     img_file_buffer = st.camera_input("Take a picture")
 
     if img_file_buffer is not None:
