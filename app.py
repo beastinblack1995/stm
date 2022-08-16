@@ -191,7 +191,8 @@ def takepic():
 
         
         bytes_data = img_file_buffer.getvalue()
-        cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)       
+        cv2_img = cv2.imdecode(np.frombuffer(bytes_data, np.uint8), cv2.IMREAD_COLOR)  
+        cv2_img = cv2.cvtColor(cv2_img, cv2.COLOR_BGR2RGB)
         
         
         
