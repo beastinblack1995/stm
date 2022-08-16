@@ -192,8 +192,8 @@ def takepic():
     if st.button('show attendence):
         st.dataframe(pd.read_csv('attendence.csv'))
     if st.button('clear attendence):
-        dz = pd.DataFrame() 
-        dz.to_csv('attendence.csv')         
+        dx = pd.DataFrame() 
+        dx.to_csv('attendence.csv')         
                              
                                  
     img_file_buffer = st.camera_input("Mark Your Attendence")
