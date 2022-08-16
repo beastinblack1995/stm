@@ -189,6 +189,13 @@ def emprec(img):
     
     
 def takepic():
+    if st.button('show attendence):
+        st.dataframe(pd.read_csv('attendence.csv'))
+    if st.button('clear attendence):
+        dz = pd.DataFrame() 
+        dz.to_csv('attendence.csv')         
+                             
+                                 
     img_file_buffer = st.camera_input("Mark Your Attendence")
 
     if img_file_buffer is not None:
